@@ -1,18 +1,12 @@
 import { defineConfig } from '@adonisjs/cors'
 
-/**
- * Configuration options to tweak the CORS policy. The following
- * options are documented on the official documentation website.
- *
- * https://docs.adonisjs.com/guides/security/cors
- */
 const corsConfig = defineConfig({
   enabled: true,
-  origin: true,
-  methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
-  headers: true,
+  origin: ['http://localhost:3000'], // Ganti dengan URL frontend (Next.js)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  headers: ['Content-Type', 'Authorization'],
   exposeHeaders: [],
-  credentials: true,
+  credentials: true, // Opsional: hanya jika pakai cookies/auth
   maxAge: 90,
 })
 

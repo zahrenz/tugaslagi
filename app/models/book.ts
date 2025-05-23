@@ -11,6 +11,12 @@ export default class Book extends BaseModel {
   @column()
   declare author: string | undefined
 
+  @column()
+  declare category: string | undefined
+
+  @column()
+  declare description: string | undefined  // ✅ Tambahan: kolom deskripsi
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | undefined
 

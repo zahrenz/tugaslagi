@@ -1,19 +1,24 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
-export default class extends BaseSchema {
+export default class Books extends BaseSchema {
   protected tableName = 'books'
 
-  async up() {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('title')
-      table.string('author')
-      table.timestamp('created_at', {useTz:true}).defaultTo(this.now())
-      table.timestamp('updated_at', {useTz:true}).defaultTo(this.now())
+      table.string('title').notNullable()
+      table.string('author').notNullable()
+      table.text('description').nullable() // ✅ Tambahan kolom deskripsi
+
+      // Tambah kolom category dengan opsi
+      table.enum('category', ['Fiction', 'Non-Fiction', 'Biography', 'Fantasy', 'Science']).notNullable()
+
+      table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())
     })
   }
 
-  async down() {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }
